@@ -42,38 +42,38 @@
 						<label for="radioButtons">Sentiment:</label>
 						<div class="radioButtons">
 							<div class="radio">
-							  <input id="radio1" type="radio" name="sentiment" value="dubious"> 
+							  <input id="radio1" type="radio" name="sentiment" value="dubious">
 							  <label for="radio1">dubious</label>
 							</div>
 							<div class="radio">
 								<input id="radio2" type="radio" name="sentiment" value="mildly concerned">
-								<label for="radio2">mildly concerned</label> 
+								<label for="radio2">mildly concerned</label>
 							</div>
 							<div class="radio">
-								<input id="radio3" type="radio" name="sentiment" value="already perfect"> 
+								<input id="radio3" type="radio" name="sentiment" value="already perfect">
 								<label for="radio3">already perfect</label>
 							</div>
 				    	</div>
 					</div>
-					
+
 					<div class="row formGroup">
 				    	<label for="noun-1">Noun:</label>
 				    	<input id="noun-1" name="noun-1">
 					</div>
 					<div class="row formGroup">
-	
+
 						<label for="checkboxes">Sentiment:</label>
 						<div class="checkboxes">
 							<div class="check">
-							  <input id="check1" type="checkbox" name="adjective-2" value="powerful"> 
+							  <input id="check1" type="checkbox" name="adjective-2" value="powerful">
 							  <label for="check1">powerful</label>
 							</div>
 							<div class="check">
 								<input id="check2" type="checkbox" name="adjective-2" value="honed">
-								<label for="check2">honed</label> 
+								<label for="check2">honed</label>
 							</div>
 							<div class="check">
-								<input id="check3" type="checkbox" name="adjective-2" value="dedicated"> 
+								<input id="check3" type="checkbox" name="adjective-2" value="dedicated">
 								<label for="check3">dedicated</label>
 							</div>
 				    	</div>
@@ -86,12 +86,12 @@
 					<div class="row formGroup">
 				    	<input type="submit">
 				    </div>
-				    
+
 			    </div>
 			</form>
 		</section>
 	</section>
-	
+
 
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
 	<script type="text/javascript">
@@ -111,11 +111,39 @@
 		$("form").on("submit", function(event){
 
 		    // Stop the form from submitting
-
+ 			  event.preventDefault(); // Stops the form from submitting!
 	    	// Run the 'makeResults' function seen above
+				makeResults();
 
-	    	/*
-			
+				// "Once upon a time there was a Developer named NAME."
+				var NAME =  $("input#name").val();
+				$('.results').append("<p>").append("Once upon a time there was a Developer named " + NAME);
+
+				//"NAME came to General Asssembly to VERB1 the great mountain of programming knowledge."
+				var VERB1 = $("select#verb-1").val();
+				$('.results').append("<p>").append(NAME + " came to General Asssembly to " + VERB1 + " the great mountain of programming knowledge.");
+
+				// ""MISSION", NAME shouted."
+				var MISSION = $("textarea#mission").val();
+				$('.results').append("<p>").append(MISSION + " , " + NAME + " shouted.");
+
+				//"Though SENTIMENT, NAME was able to overcome all obstacles with the power of their NOUN."
+				var NOUN1 = $("input#noun-1").val();
+				var SENTIMENT = $('input[name=sentiment]:checked').val();
+				$('.results').append("<p>").append("Though " + SENTIMENT + " , " + NAME + "was able to overcome all obstacles with the power of their " + NOUN1 +" .");
+
+				//"In the end, their success can be contributed entirely to their " + ADJECTIVE2[list each one checked, comma-separated] + NOUN2."
+				var NOUN2 = $("input#noun-2").val();
+				var ADJECTIVE2 = $('input[name="adjective-2"]:checked').map(function ()
+				{
+        	return this.value;
+        }).get().join(", ");
+
+				console.log(ADJECTIVE2);
+				$('.results').append("<p>").append("In the end, their success can be contributed entirely to their " + ADJECTIVE2 + " " + NOUN2);
+
+				/*
+
 				For each value entered into a form input, add the input to the corresponding sentence, then append the text into the results section:
 
 				"Once upon a time there was a Developer named NAME."
@@ -123,15 +151,14 @@
 				"NAME came to General Asssembly to VERB1 the great mountain of programming knowledge."
 
 				""MISSION", NAME shouted."
-	
+
 				"Though SENTIMENT, NAME was able to overcome all obstacles with the power of their NOUN."
 
 				"In the end, their success can be contributed entirely to their " + ADJECTIVE2[list each one checked, comma-separated] + NOUN2."
 
-	    	*/ 
+	    	*/
 		});
 	</script>
 
 </body>
 </html>
-
